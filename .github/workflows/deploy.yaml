@@ -32,11 +32,11 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Log in to DO Container Registry
-        # if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request'
         run: doctl registry login --expiry-seconds 600
 
       - name: Log in to DOKS
-        # if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request'
         run:  doctl kubernetes cluster config save ${{ secrets.DIGITALOCEAN_KUBE_CLUSTER_ID }}
         
       # Workaround: https://github.com/docker/build-push-action/issues/461
@@ -65,7 +65,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Update variables
-        # if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request'
         uses: dominicwatson/github-action-envsubst@v1
         with:
           files: kube/bot.yaml kube/db.yaml
@@ -77,10 +77,6 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_REPLICATION_PASSWORD: ${{ secrets.POSTGRES_REPLICATION_PASSWORD }}
           DISCORD_PREFIX: ${{ secrets.DISCORD_PREFIX }}
-
-      - name: Update variables
-        run: |
-          cat kube/bot.yaml kube/db.yaml
 
       - name: Deploy
         if: github.event_name != 'pull_request'
