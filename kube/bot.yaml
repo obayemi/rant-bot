@@ -6,7 +6,8 @@ metadata:
   name: rant-bot-secrets
 type: Opaque
 stringData:
-  databaseUrl: ##DATABASE_URL##
+  databaseUrl: $DATABASE_URL
+  discordToken: $DISCORD_TOKEN
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -27,10 +28,17 @@ spec:
     spec:
       containers:
       - name: rant-bot
-        image: ##IMAGE##
+        image: $IMAGE
         env:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               name: rant-bot-secrets
               key: databaseUrl
+        - name: DISCORD_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rant-bot-secrets
+              key: discordToken
+        - name: DISCORD_PREFIX
+          value: $DISCORD_PREFIX

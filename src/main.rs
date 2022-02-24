@@ -113,6 +113,8 @@ async fn main() {
         .await
         .expect("error connecting to the db");
 
+    sqlx::migrate!().run(&pool).await.unwrap();
+
     info!(test_value = 2, "aaa");
     poise::Framework::build()
         .token(std::env::var("DISCORD_TOKEN").unwrap())

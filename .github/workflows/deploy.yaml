@@ -85,6 +85,7 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           kubectl apply -f kube/namespace.yaml
+          kubectl apply -f kube/db.yaml
           kubectl apply -f kube/bot.yaml
 
       - name: Check
