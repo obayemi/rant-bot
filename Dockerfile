@@ -5,7 +5,7 @@ WORKDIR ./rant-bot
 COPY ./Cargo.toml ./Cargo.toml
 RUN cargo build --release
 RUN rm src/*.rs
-RUN rm ./target/release/deps/rant-bot*
+RUN rm ./target/release/deps/rant_bot*
 
 ADD ./src ./src
 ADD ./sqlx-data.json ./
