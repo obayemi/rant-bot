@@ -114,7 +114,7 @@ pub async fn unregister(
         name,
     ).execute(&ctx.data().pool)
     .await.map_err(|_| anyhow!(format!("unable to unregister rant `{}`", name)))?;
-    ctx.say("rant forgotten");
+    ctx.say("rant forgotten").await?;
     Ok(())
 }
 

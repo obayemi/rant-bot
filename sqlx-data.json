@@ -1,5 +1,18 @@
 {
   "db": "PostgreSQL",
+  "2d00bfb423fa54018b0c695c8b5b7b7b785cb3cd4b20c206864aee5464707559": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Left": [
+          "Int8",
+          "Text"
+        ]
+      }
+    },
+    "query": "DELETE FROM rants WHERE guild_id = $1 AND name = $2"
+  },
   "3890f646178a1abe7693167fbb2a31d1c086903f687f11e3c1f036415d8ac5f8": {
     "describe": {
       "columns": [
