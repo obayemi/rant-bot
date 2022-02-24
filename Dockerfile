@@ -8,7 +8,7 @@ RUN rm src/*.rs
 RUN rm ./target/release/deps/rant_bot*
 
 ADD ./src ./src
-ADD ./sqlx-data.json ./
+ADD ./sqlx-data.json ./migrations ./
 
 RUN cargo build --release
 
