@@ -72,7 +72,7 @@ jobs:
           patterns: $IMAGE $DATABASE_URL $DISCORD_TOKEN $DISCORD_PREFIX $POSTGRES_PASSWORD $POSTGRES_REPLICATION_PASSWORD
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          IMAGE: ${{ env.REGISTRY }}
+          IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_REPLICATION_PASSWORD: ${{ secrets.POSTGRES_REPLICATION_PASSWORD }}

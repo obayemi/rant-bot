@@ -1,4 +1,3 @@
-use poise::serenity_prelude as serenity;
 use tracing::info;
 use sqlx::postgres::{PgPoolOptions,PgPool};
 use std::env;
@@ -100,6 +99,22 @@ pub async fn set(
         .ok_or(anyhow!("rant registering failed"))?;
 
     ctx.say("rant received").await?;
+    Ok(())
+}
+
+/// unregister a rants
+#[poise::command(prefix_command, slash_command)]
+pub async fn unregister(
+    ctx: Context<'_>,
+    #[description = "name"] name: String,
+) -> Result<(), Error> {
+    sqlx::query!(
+        "DELETE FROM rants WHERE guild_id = $1 AND name = $2",
+        ctx.guild_id().ok_or(anyhow!("guild only command"))?.0 as i64,
+        name,
+    ).execute(&ctx.data().pool)
+    .await.map_err(|_| anyhow!(format!("unable to unregister rant `{}`", name)))?;
+    ctx.say("rant forgotten");
     Ok(())
 }
 
