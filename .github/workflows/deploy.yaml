@@ -76,6 +76,7 @@ jobs:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_REPLICATION_PASSWORD: ${{ secrets.POSTGRES_REPLICATION_PASSWORD }}
+          DISCORD_PREFIX: ${{ secrets.DISCORD_PREFIX }}
 
       - name: Update variables
         run: |
