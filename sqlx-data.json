@@ -1,0 +1,68 @@
+{
+  "db": "PostgreSQL",
+  "3890f646178a1abe7693167fbb2a31d1c086903f687f11e3c1f036415d8ac5f8": {
+    "describe": {
+      "columns": [
+        {
+          "name": "name",
+          "ordinal": 0,
+          "type_info": "Varchar"
+        }
+      ],
+      "nullable": [
+        false
+      ],
+      "parameters": {
+        "Left": [
+          "Int8",
+          "Text"
+        ]
+      }
+    },
+    "query": "SELECT name FROM rants WHERE guild_id = $1 AND name LIKE $2"
+  },
+  "7fb80e22b4d563728d3efb282bd0e54cd8fe6801a116b51d05cd22597b2be3fc": {
+    "describe": {
+      "columns": [
+        {
+          "name": "rant",
+          "ordinal": 0,
+          "type_info": "Text"
+        }
+      ],
+      "nullable": [
+        false
+      ],
+      "parameters": {
+        "Left": [
+          "Int8",
+          "Text"
+        ]
+      }
+    },
+    "query": "SELECT rant FROM rants WHERE guild_id = $1 AND name = $2"
+  },
+  "96c5cc1bc3e64fd6e557ab77f0f95641fb675d1070486d2e735434ee4ede4649": {
+    "describe": {
+      "columns": [
+        {
+          "name": "id",
+          "ordinal": 0,
+          "type_info": "Int4"
+        }
+      ],
+      "nullable": [
+        false
+      ],
+      "parameters": {
+        "Left": [
+          "Int8",
+          "Varchar",
+          "Text",
+          "Int8"
+        ]
+      }
+    },
+    "query": "INSERT INTO rants (guild_id, name, rant, author) VALUES ($1, $2, $3, $4)\n            ON CONFLICT (guild_id, name) DO UPDATE SET rant = EXCLUDED.rant RETURNING id"
+  }
+}
